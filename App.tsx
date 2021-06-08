@@ -14,6 +14,7 @@ import {
 
 import Loading from '@/components/Loading';
 import Home from '@/screens/Home';
+import CarDetails from '@/screens/CarDetails';
 import { theme } from '@/styles/theme';
 
 const App = (): JSX.Element => {
@@ -31,7 +32,7 @@ const App = (): JSX.Element => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Home />
+      <CarDetails />
     </ThemeProvider>
   );
 };
