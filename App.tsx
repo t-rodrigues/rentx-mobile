@@ -13,8 +13,7 @@ import {
 } from '@expo-google-fonts/inter';
 
 import Loading from '@/components/Loading';
-import Home from '@/screens/Home';
-import CarDetails from '@/screens/CarDetails';
+import Scheduling from '@/screens/Scheduling';
 import { theme } from '@/styles/theme';
 
 const App = (): JSX.Element => {
@@ -32,7 +31,7 @@ const App = (): JSX.Element => {
 
   return (
     <ThemeProvider theme={theme}>
-      <CarDetails />
+      <Scheduling />
     </ThemeProvider>
   );
 };

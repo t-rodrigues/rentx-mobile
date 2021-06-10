@@ -44,7 +44,7 @@ const Home = (): JSX.Element => {
       <CarsList
         data={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
         keyExtractor={item => String(item)}
-        renderItem={() => <Car data={car} />}
+        renderItem={({ item }) => <Car data={car} />}
       />
     </Container>
   );

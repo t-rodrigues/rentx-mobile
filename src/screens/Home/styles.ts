@@ -2,6 +2,17 @@ import styled from 'styled-components/native';
 import { FlatList } from 'react-native';
 import { RFValue } from 'react-native-responsive-fontsize';
 
+type CarData = {
+  id: string;
+  brand: string;
+  name: string;
+  rent: {
+    period: string;
+    price: number;
+  };
+  thumbnail: string;
+};
+
 export const Container = styled.View`
   flex: 1;
 
@@ -30,6 +41,11 @@ export const TotalCars = styled.Text`
 
   color: ${({ theme }) => theme.colors.text};
 `;
+
+// export const CarsList = styled(FlatList as new () => FlatList<CarData>).attrs({
+//   contentContainerStyle: { padding: 16 },
+//   showsVerticalScrollIndicator: false,
+// })``;
 
 export const CarsList = styled(FlatList).attrs({
   contentContainerStyle: { padding: 16 },
