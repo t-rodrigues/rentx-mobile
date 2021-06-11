@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
 import React from 'react';
-import { ThemeProvider } from 'styled-components';
+
 import {
   Archivo_400Regular,
   Archivo_500Medium,
@@ -12,8 +12,10 @@ import {
   useFonts,
 } from '@expo-google-fonts/inter';
 
+import { ThemeProvider } from 'styled-components';
+
 import Loading from '@/components/Loading';
-import SchedulingComplete from '@/screens/SchedulingComplete';
+import Routes from '@/routes';
 import { theme } from '@/styles/theme';
 
 const App = (): JSX.Element => {
@@ -31,7 +33,7 @@ const App = (): JSX.Element => {
 
   return (
     <ThemeProvider theme={theme}>
-      <SchedulingComplete />
+      <Routes />
     </ThemeProvider>
   );
 };
