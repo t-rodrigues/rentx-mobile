@@ -1,6 +1,12 @@
 import React from 'react';
 
+import { useNavigation } from '@react-navigation/core';
+
+import Speed from '@/assets/speed.svg';
+
+import Accessory from '@/components/Accessory';
 import BackButton from '@/components/BackButton';
+import Button from '@/components/Button';
 import ImageSlider from '@/components/ImageSlider';
 
 import {
@@ -20,15 +26,17 @@ import {
   Footer,
 } from './styles';
 
-import Speed from '@/assets/speed.svg';
-import Accessory from '@/components/Accessory';
-import Button from '@/components/Button';
-
 const CarDetails = (): JSX.Element => {
+  const navigation = useNavigation();
+
+  const handleSchedule = () => {
+    navigation.navigate('Scheduling');
+  };
+
   return (
     <Container>
       <Header>
-        <BackButton />
+        <BackButton onPress={() => navigation.goBack()} />
       </Header>
 
       <CarImages>
@@ -70,7 +78,7 @@ const CarDetails = (): JSX.Element => {
       </Content>
 
       <Footer>
-        <Button title="Escolher período do aluguel" onPress={() => {}} />
+        <Button title="Escolher período do aluguel" onPress={handleSchedule} />
       </Footer>
     </Container>
   );

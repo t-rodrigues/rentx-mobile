@@ -17,11 +17,12 @@ export const Container = styled.View`
 
 export const Header = styled.View`
   width: 100%;
-  /* flex: 1; */
   background-color: ${({ theme }) => theme.colors.header};
 
   padding: ${getStatusBarHeight()}px 24px 24px;
 `;
+
+export const Back = styled.View``;
 
 export const Title = styled.Text`
   font-family: ${({ theme }) => theme.fonts.secondary600};

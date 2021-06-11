@@ -1,14 +1,22 @@
 import React from 'react';
 import { StatusBar, useWindowDimensions } from 'react-native';
 
-import Logo from '@/assets/logo_background_gray.svg';
-import Done from '@/assets/done.svg';
+import { useNavigation } from '@react-navigation/core';
 
-import { Container, Content, Title, Message, Footer } from './styles';
+import Done from '@/assets/done.svg';
+import Logo from '@/assets/logo_background_gray.svg';
+
 import ConfirmButton from '@/components/ConfirmButton';
 
+import { Container, Content, Title, Message, Footer } from './styles';
+
 const SchedulingComplete = (): JSX.Element => {
+  const navigation = useNavigation();
   const { width } = useWindowDimensions();
+
+  const handleConfirm = () => {
+    navigation.navigate('Home');
+  };
 
   return (
     <Container>
@@ -32,7 +40,7 @@ const SchedulingComplete = (): JSX.Element => {
       </Content>
 
       <Footer>
-        <ConfirmButton title="Ok" />
+        <ConfirmButton title="Ok" onPress={handleConfirm} />
       </Footer>
     </Container>
   );

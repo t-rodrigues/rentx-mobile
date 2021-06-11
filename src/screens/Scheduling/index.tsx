@@ -1,5 +1,7 @@
 import React from 'react';
 import { StatusBar } from 'react-native';
+
+import { useNavigation } from '@react-navigation/core';
 import { useTheme } from 'styled-components';
 
 import ArrowRightSvg from '@/assets/arrow.svg';
@@ -11,6 +13,7 @@ import Calendar from '@/components/Calendar';
 import {
   Container,
   Header,
+  Back,
   Title,
   RentalPeriod,
   DateInfo,
@@ -21,7 +24,12 @@ import {
 } from './styles';
 
 const Scheduling = (): JSX.Element => {
+  const navigation = useNavigation();
   const theme = useTheme();
+
+  const handleScheduleConfirm = () => {
+    navigation.navigate('SchedulingDetails');
+  };
 
   return (
     <Container>
@@ -32,7 +40,12 @@ const Scheduling = (): JSX.Element => {
       />
 
       <Header>
-        <BackButton color={theme.colors.shape} />
+        <Back>
+          <BackButton
+            color={theme.colors.shape}
+            onPress={() => navigation.goBack()}
+          />
+        </Back>
 
         <Title>
           Escolha uma {'\n'}data de início e {'\n'}fim do aluguel
@@ -58,7 +71,7 @@ const Scheduling = (): JSX.Element => {
       </Content>
 
       <Footer>
-        <Button title="Confirmar" onPress={console.log} />
+        <Button title="Confirmar" onPress={handleScheduleConfirm} />
       </Footer>
     </Container>
   );

@@ -1,8 +1,14 @@
 import React from 'react';
 import { RFValue } from 'react-native-responsive-fontsize';
+
+import { useNavigation } from '@react-navigation/core';
 import { useTheme } from 'styled-components';
 
+import Speed from '@/assets/speed.svg';
+
+import Accessory from '@/components/Accessory';
 import BackButton from '@/components/BackButton';
+import Button from '@/components/Button';
 import ImageSlider from '@/components/ImageSlider';
 
 import {
@@ -33,17 +39,18 @@ import {
   RentalPriceTotal,
 } from './styles';
 
-import Speed from '@/assets/speed.svg';
-import Accessory from '@/components/Accessory';
-import Button from '@/components/Button';
-
 const SchedulingDetails = (): JSX.Element => {
+  const navigation = useNavigation();
   const theme = useTheme();
+
+  const handleScheduleConfirm = () => {
+    navigation.navigate('SchedulingComplete');
+  };
 
   return (
     <Container>
       <Header>
-        <BackButton />
+        <BackButton onPress={() => navigation.goBack()} />
       </Header>
 
       <CarImages>
@@ -108,7 +115,7 @@ const SchedulingDetails = (): JSX.Element => {
         <Button
           title="Alugar agora"
           color={theme.colors.success}
-          onPress={() => console.log}
+          onPress={handleScheduleConfirm}
         />
       </Footer>
     </Container>

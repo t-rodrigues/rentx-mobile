@@ -1,4 +1,5 @@
 import React from 'react';
+import { RectButtonProps } from 'react-native-gesture-handler';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { useTheme } from 'styled-components';
 
@@ -27,15 +28,15 @@ type CarData = {
   thumbnail: string;
 };
 
-type Props = {
+interface Props extends RectButtonProps {
   data: CarData;
-};
+}
 
-const Car = ({ data }: Props): JSX.Element => {
+const Car = ({ data, ...rest }: Props): JSX.Element => {
   const theme = useTheme();
 
   return (
-    <Container>
+    <Container {...rest}>
       <Details>
         <Brand>{data.brand}</Brand>
         <Name>{data.name}</Name>
