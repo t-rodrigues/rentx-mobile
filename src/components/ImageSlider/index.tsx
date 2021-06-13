@@ -8,13 +8,8 @@ import {
   CarImage,
 } from './styles';
 
-type ImageUrl = {
-  id: string;
-  url: string;
-};
-
 type Props = {
-  imagesUrl: ImageUrl[];
+  imagesUrl: string[];
 };
 
 const ImageSlider = ({ imagesUrl }: Props): JSX.Element => {
@@ -30,10 +25,10 @@ const ImageSlider = ({ imagesUrl }: Props): JSX.Element => {
 
       <CarImageWrapper>
         {imagesUrl &&
-          imagesUrl.map(image => (
+          imagesUrl.map((image, index) => (
             <CarImage
-              key={image.id}
-              source={{ uri: image.url }}
+              key={index}
+              source={{ uri: image }}
               resizeMode="contain"
             />
           ))}

@@ -137,6 +137,7 @@ export const Arrow = styled(Feather)`
 export const RentalPrice = styled.View`
   width: 100%;
   margin-top: 16px;
+  padding-bottom: 16px;
 `;
 
 export const RentalPriceLabel = styled.Text`

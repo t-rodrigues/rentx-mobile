@@ -1,17 +1,10 @@
 import styled from 'styled-components/native';
 import { FlatList } from 'react-native';
 import { RFValue } from 'react-native-responsive-fontsize';
+import { Ionicons } from '@expo/vector-icons';
+import { RectButton } from 'react-native-gesture-handler';
 
-type CarData = {
-  id: string;
-  brand: string;
-  name: string;
-  rent: {
-    period: string;
-    price: number;
-  };
-  thumbnail: string;
-};
+import { CarDto } from '@/services/fetchCars';
 
 export const Container = styled.View`
   flex: 1;
@@ -42,12 +35,28 @@ export const TotalCars = styled.Text`
   color: ${({ theme }) => theme.colors.text};
 `;
 
-// export const CarsList = styled(FlatList as new () => FlatList<CarData>).attrs({
-//   contentContainerStyle: { padding: 16 },
-//   showsVerticalScrollIndicator: false,
-// })``;
-
-export const CarsList = styled(FlatList).attrs({
+export const CarsList = styled(FlatList as new () => FlatList<CarDto>).attrs({
   contentContainerStyle: { padding: 16 },
   showsVerticalScrollIndicator: false,
 })``;
+
+export const MyCarsButton = styled(RectButton)`
+  width: 60px;
+  height: 60px;
+  border-radius: 30px;
+  justify-content: center;
+  align-items: center;
+
+  position: absolute;
+  bottom: 0;
+  right: 0;
+
+  margin-bottom: 24px;
+  margin-right: 24px;
+  background-color: ${({ theme }) => theme.colors.main};
+`;
+
+export const MyCarsButtonIcon = styled(Ionicons)`
+  color: ${({ theme }) => theme.colors.shape};
+  font-size: ${RFValue(32)}px;
+`;

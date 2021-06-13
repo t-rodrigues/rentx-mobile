@@ -3,7 +3,8 @@ import { RectButtonProps } from 'react-native-gesture-handler';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { useTheme } from 'styled-components';
 
-import Energy from '@/assets/energy.svg';
+import { CarDto } from '@/services/fetchCars';
+import { getAccessoryIcon } from '@/utils/getAccessoryIcon';
 
 import {
   Container,
@@ -18,22 +19,13 @@ import {
   CarImage,
 } from './styles';
 
-type CarData = {
-  brand: string;
-  name: string;
-  rent: {
-    period: string;
-    price: number;
-  };
-  thumbnail: string;
-};
-
 interface Props extends RectButtonProps {
-  data: CarData;
+  data: CarDto;
 }
 
 const Car = ({ data, ...rest }: Props): JSX.Element => {
   const theme = useTheme();
+  const TypeIcon = getAccessoryIcon(data.fuel_type);
 
   return (
     <Container {...rest}>
@@ -47,7 +39,7 @@ const Car = ({ data, ...rest }: Props): JSX.Element => {
             <Price>{`R$ ${data.rent.price}`}</Price>
           </Rent>
           <Type>
-            <Energy
+            <TypeIcon
               width={RFValue(20)}
               height={RFValue(20)}
               color={theme.colors.textDetail}
