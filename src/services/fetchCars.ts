@@ -19,11 +19,11 @@ export type CarDto = {
   fuel_type: string;
   thumbnail: string;
   accessories: Accessory[];
-  photos: [''];
+  photos: string[];
 };
 
-export async function fetchCars(): Promise<Car[]> {
-  const response = await api.get<Car[]>('/cars');
+export async function fetchCars(): Promise<CarDto[]> {
+  const response = await api.get<CarDto[]>('/cars');
 
   return response.data;
 }

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Alert } from 'react-native';
+import { Alert, StatusBar } from 'react-native';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { format } from 'date-fns';
 
@@ -69,6 +69,16 @@ const SchedulingDetails = (): JSX.Element => {
 
     const unavailableDates = [...response.data.unavailable_dates, ...dates];
 
+    await api.post('/schedules_byuser', {
+      user_id: 1,
+      car,
+      startDate: format(getPlatformDate(new Date(dates[0])), 'dd/MM/yyyy'),
+      endDate: format(
+        getPlatformDate(new Date(dates[dates.length - 1])),
+        'dd/MM/yyyy',
+      ),
+    });
+
     api
       .put(`/schedules_bycars/${car.id}`, {
         id: car.id,
@@ -94,6 +104,12 @@ const SchedulingDetails = (): JSX.Element => {
 
   return (
     <Container>
+      <StatusBar
+        barStyle="dark-content"
+        translucent
+        backgroundColor="transparent"
+      />
+
       <Header>
         <BackButton onPress={() => navigation.goBack()} />
       </Header>

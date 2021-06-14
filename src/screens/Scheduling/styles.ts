@@ -19,7 +19,7 @@ export const Header = styled.View`
   width: 100%;
   background-color: ${({ theme }) => theme.colors.header};
 
-  padding: ${getStatusBarHeight()}px 24px 24px;
+  padding: ${getStatusBarHeight() + 30}px 24px 24px;
 `;
 
 export const Back = styled.View``;

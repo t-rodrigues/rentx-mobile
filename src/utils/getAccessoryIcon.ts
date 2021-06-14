@@ -21,7 +21,7 @@ export function getAccessoryIcon(type: string): React.FC<SvgProps> {
       return Force;
     case 'gasoline_motor':
       return Gasoline;
-    case 'electric_motor':
+    case 'electric_motor' || 'electric':
       return Energy;
     case 'hybrid_motor':
       return Hybrid;
