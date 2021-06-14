@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
+import { ViewToken } from 'react-native';
 
 import {
   Container,
   ImageIndexes,
   ImageIndex,
   CarImageWrapper,
+  CarImageList,
   CarImage,
 } from './styles';
 
@@ -12,27 +14,39 @@ type Props = {
   imagesUrl: string[];
 };
 
+type ChangeImageProps = {
+  viewableItems: ViewToken[];
+  changed: ViewToken[];
+};
+
 const ImageSlider = ({ imagesUrl }: Props): JSX.Element => {
+  const [imageIndex, setImageIndex] = useState(0);
+
+  const indexChanged = useRef((info: ChangeImageProps) => {
+    const index = info.viewableItems[0].index;
+    setImageIndex(Number(index));
+  });
+
   return (
     <Container>
       <ImageIndexes>
-        <ImageIndex active={true} />
-        <ImageIndex active={false} />
-        <ImageIndex active={false} />
-        <ImageIndex active={false} />
-        <ImageIndex active={false} />
+        {imagesUrl.map((_, index) => (
+          <ImageIndex key={index} active={index === imageIndex} />
+        ))}
       </ImageIndexes>
 
-      <CarImageWrapper>
-        {imagesUrl &&
-          imagesUrl.map((image, index) => (
-            <CarImage
-              key={index}
-              source={{ uri: image }}
-              resizeMode="contain"
-            />
-          ))}
-      </CarImageWrapper>
+      <CarImageList
+        data={imagesUrl}
+        keyExtractor={key => key}
+        renderItem={({ item }) => (
+          <CarImageWrapper>
+            <CarImage source={{ uri: item }} resizeMode="contain" />
+          </CarImageWrapper>
+        )}
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        onViewableItemsChanged={indexChanged.current}
+      />
     </Container>
   );
 };

@@ -1,5 +1,5 @@
 import styled from 'styled-components/native';
-import { Dimensions } from 'react-native';
+import { Dimensions, FlatList } from 'react-native';
 
 type ImageIndexProps = {
   active: boolean;
@@ -31,6 +31,8 @@ export const CarImageWrapper = styled.View`
   justify-content: center;
   align-items: center;
 `;
+
+export const CarImageList = styled(FlatList as new () => FlatList<string>)``;
 
 export const CarImage = styled.Image`
   width: 280px;
