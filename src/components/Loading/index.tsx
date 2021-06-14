@@ -7,12 +7,13 @@ import { Container } from './styles';
 
 type Props = {
   size: 'large' | 'small';
+  color?: string;
 };
 
-const Loading = ({ size }: Props): JSX.Element => {
+const Loading = ({ size, color = theme.colors.main }: Props): JSX.Element => {
   return (
     <Container>
-      <ActivityIndicator size={size} color={theme.colors.main} />
+      <ActivityIndicator size={size} color={color} />
     </Container>
   );
 };

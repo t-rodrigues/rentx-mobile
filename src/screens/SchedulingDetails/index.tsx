@@ -55,6 +55,7 @@ type RentalPeriod = {
 };
 
 const SchedulingDetails = (): JSX.Element => {
+  const [loading, setLoading] = useState(false);
   const [rentalPeriod, setRentalPeriod] = useState({} as RentalPeriod);
 
   const navigation = useNavigation();
@@ -65,6 +66,7 @@ const SchedulingDetails = (): JSX.Element => {
   const rentalTotal = Number(car.rent.price) * dates.length;
 
   const handleScheduleConfirm = async () => {
+    setLoading(true);
     const response = await api.get(`/schedules_bycars/${car.id}`);
 
     const unavailableDates = [...response.data.unavailable_dates, ...dates];
@@ -87,9 +89,10 @@ const SchedulingDetails = (): JSX.Element => {
       .then(() => {
         navigation.navigate('SchedulingComplete');
       })
-      .catch(() =>
-        Alert.alert('Error!', 'Não foi possível conclur sua solicitação'),
-      );
+      .catch(() => {
+        setLoading(false);
+        Alert.alert('Error!', 'Não foi possível conclur sua solicitação');
+      });
   };
 
   useEffect(() => {
@@ -174,6 +177,8 @@ const SchedulingDetails = (): JSX.Element => {
           title="Alugar agora"
           color={theme.colors.success}
           onPress={handleScheduleConfirm}
+          enabled={!loading}
+          loading={loading}
         />
       </Footer>
     </Container>

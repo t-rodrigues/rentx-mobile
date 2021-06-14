@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StatusBar, Alert } from 'react-native';
+import { StatusBar } from 'react-native';
 import { format } from 'date-fns';
 
 import { useNavigation, useRoute } from '@react-navigation/native';
@@ -57,9 +57,6 @@ const Scheduling = (): JSX.Element => {
   const { car } = route.params as Params;
 
   const handleScheduleConfirm = () => {
-    if (!rentalPeriod.start || !rentalPeriod.end) {
-      return Alert.alert('Atenção!', 'Selecione um intervalo de datas');
-    }
     navigation.navigate('SchedulingDetails', {
       car,
       dates: Object.keys(markedDates),
@@ -133,7 +130,11 @@ const Scheduling = (): JSX.Element => {
       </Content>
 
       <Footer>
-        <Button title="Confirmar" onPress={handleScheduleConfirm} />
+        <Button
+          enabled={!!rentalPeriod.start && !!rentalPeriod.end}
+          title="Confirmar"
+          onPress={handleScheduleConfirm}
+        />
       </Footer>
     </Container>
   );
