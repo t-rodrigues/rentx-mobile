@@ -52,6 +52,7 @@ const Home = (): JSX.Element => {
   return (
     <Container>
       <StatusBar
+        hidden={false}
         barStyle="light-content"
         backgroundColor="transparent"
         translucent
