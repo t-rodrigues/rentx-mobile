@@ -1,7 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { StatusBar } from 'react-native';
+import { StatusBar, BackHandler } from 'react-native';
+import { PanGestureHandler } from 'react-native-gesture-handler';
 import { RFValue } from 'react-native-responsive-fontsize';
 
+import Animated, {
+  useAnimatedStyle,
+  useAnimatedGestureHandler,
+  useSharedValue,
+} from 'react-native-reanimated';
 import { useNavigation } from '@react-navigation/native';
 
 import Logo from '@/assets/logo.svg';
@@ -20,9 +26,39 @@ import {
   MyCarsButtonIcon,
 } from './styles';
 
+const ButtonAnimated = Animated.createAnimatedComponent(MyCarsButton);
+
 const Home = (): JSX.Element => {
   const [loading, setLoading] = useState(true);
   const [cars, setCars] = useState<CarDto[]>([]);
+
+  const positionX = useSharedValue(0);
+  const positionY = useSharedValue(0);
+
+  const myCarsButtonStyle = useAnimatedStyle(() => {
+    return {
+      transform: [
+        { translateX: positionX.value },
+        { translateY: positionY.value },
+      ],
+    };
+  });
+
+  const onGestureEvent = useAnimatedGestureHandler({
+    onStart: (_, ctx: any) => {
+      ctx.positionX = positionX.value;
+      ctx.positionY = positionY.value;
+    },
+    onActive: (event, ctx: any) => {
+      positionX.value = ctx.positionX + event.translationX;
+      positionY.value = ctx.positionY + event.translationY;
+    },
+    onEnd: () => {
+      // positionX.value = 0;
+      // positionY.value = 0;
+    },
+  });
+
   const navigation = useNavigation();
 
   const handleCardDetails = (car: CarDto) => {
@@ -49,6 +85,10 @@ const Home = (): JSX.Element => {
     loadCars();
   }, []);
 
+  useEffect(() => {
+    BackHandler.addEventListener('hardwareBackPress', () => true);
+  }, []);
+
   return (
     <Container>
       <StatusBar
@@ -62,7 +102,7 @@ const Home = (): JSX.Element => {
         <HeaderContent>
           <Logo width={RFValue(108)} height={RFValue(12)} />
 
-          <TotalCars>Total de {cars.length} carros</TotalCars>
+          {!loading && <TotalCars>Total de {cars.length} carros</TotalCars>}
         </HeaderContent>
       </Header>
 
@@ -78,9 +118,18 @@ const Home = (): JSX.Element => {
         />
       )}
 
-      <MyCarsButton onPress={handleOpenMyCars}>
-        <MyCarsButtonIcon name="ios-car-sport" />
-      </MyCarsButton>
+      <PanGestureHandler onGestureEvent={onGestureEvent}>
+        <Animated.View
+          style={[
+            myCarsButtonStyle,
+            { position: 'absolute', right: 24, bottom: 24 },
+          ]}
+        >
+          <ButtonAnimated onPress={handleOpenMyCars}>
+            <MyCarsButtonIcon name="ios-car-sport" />
+          </ButtonAnimated>
+        </Animated.View>
+      </PanGestureHandler>
     </Container>
   );
 };
