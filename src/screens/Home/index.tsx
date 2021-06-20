@@ -14,7 +14,7 @@ import Logo from '@/assets/logo.svg';
 import { CarDto, fetchCars } from '@/services/fetchCars';
 
 import Car from '@/components/Car';
-import Loading from '@/components/Loading';
+import LoadingAnimated from '@/components/LoadingAnimated';
 
 import {
   Container,
@@ -107,7 +107,7 @@ const Home = (): JSX.Element => {
       </Header>
 
       {loading ? (
-        <Loading size="large" />
+        <LoadingAnimated />
       ) : (
         <CarsList
           data={cars}

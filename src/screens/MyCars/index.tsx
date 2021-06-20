@@ -9,7 +9,7 @@ import { api } from '@/services/api';
 
 import BackButton from '@/components/BackButton';
 import Car from '@/components/Car';
-import Loading from '@/components/Loading';
+import LoadingAnimated from '@/components/LoadingAnimated';
 
 import {
   Container,
@@ -83,7 +83,7 @@ const MyCars = (): JSX.Element => {
       </Header>
 
       {loading ? (
-        <Loading size="large" />
+        <LoadingAnimated />
       ) : (
         <Content>
           <Appointments>
