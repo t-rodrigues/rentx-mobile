@@ -7,13 +7,14 @@ import Scheduling from '@/screens/Scheduling';
 import SchedulingDetails from '@/screens/SchedulingDetails';
 import SchedulingComplete from '@/screens/SchedulingComplete';
 import MyCars from '@/screens/MyCars';
+import SignIn from '@/screens/SignIn';
 import Splash from '@/screens/Splash';
 
 const { Navigator, Screen } = createStackNavigator();
 
 const StackRoutes = (): JSX.Element => {
   return (
-    <Navigator initialRouteName="Splash" headerMode="none">
+    <Navigator initialRouteName="SignIn" headerMode="none">
       <Screen
         name="Home"
         component={Home}
@@ -25,6 +26,7 @@ const StackRoutes = (): JSX.Element => {
       <Screen name="SchedulingComplete" component={SchedulingComplete} />
       <Screen name="MyCars" component={MyCars} />
       <Screen name="Splash" component={Splash} />
+      <Screen name="SignIn" component={SignIn} />
     </Navigator>
   );
 };

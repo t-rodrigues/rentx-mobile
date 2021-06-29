@@ -6,17 +6,23 @@ type ButtonProps = {
   color?: string;
 };
 
+type ButtonTitle = {
+  light: boolean;
+};
+
 export const Container = styled(RectButton)<ButtonProps>`
   background-color: ${({ theme, color }) => color || theme.colors.main};
   width: 100%;
   padding: 18px;
+  margin-bottom: 8px;
 
   align-items: center;
   justify-content: center;
 `;
 
-export const Title = styled.Text`
+export const Title = styled.Text<ButtonTitle>`
   font-family: ${({ theme }) => theme.fonts.primary500};
-  color: ${({ theme }) => theme.colors.shape};
+  color: ${({ theme, light }) =>
+    light ? theme.colors.title : theme.colors.shape};
   font-size: ${RFValue(15)}px;
 `;

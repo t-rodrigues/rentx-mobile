@@ -8,9 +8,8 @@ import { Container, Title } from './styles';
 interface Props extends RectButtonProps {
   title: string;
   color?: string;
-  onPress: () => void;
-  enabled?: boolean;
   loading?: boolean;
+  light?: boolean;
 }
 
 const Button = ({
@@ -19,6 +18,7 @@ const Button = ({
   onPress,
   enabled = true,
   loading = false,
+  light = false,
   ...rest
 }: Props): JSX.Element => {
   return (
@@ -29,7 +29,11 @@ const Button = ({
       style={{ opacity: !enabled || loading ? 0.5 : 1 }}
       {...rest}
     >
-      {loading ? <Loading size="large" /> : <Title>{title}</Title>}
+      {loading ? (
+        <Loading size="large" />
+      ) : (
+        <Title light={light}>{title}</Title>
+      )}
     </Container>
   );
 };
