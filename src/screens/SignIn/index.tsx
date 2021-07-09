@@ -9,6 +9,7 @@ import {
 import * as Yup from 'yup';
 
 import { useTheme } from 'styled-components';
+import { useNavigation } from '@react-navigation/native';
 
 import Button from '@/components/Button';
 import Input from '@/components/Input';
@@ -21,6 +22,11 @@ const SignIn = (): JSX.Element => {
   const [password, setPassword] = useState('');
 
   const theme = useTheme();
+  const navigation = useNavigation();
+
+  const handleSignUp = () => {
+    navigation.navigate('SignUpFirstStep');
+  };
 
   const handleSignIn = async () => {
     try {
@@ -87,7 +93,7 @@ const SignIn = (): JSX.Element => {
 
             <Button
               title="Criar conta gratuita"
-              onPress={() => console.log}
+              onPress={handleSignUp}
               color={theme.colors.backgroundSecondary}
               light
               enabled

@@ -1,10 +1,6 @@
 import styled from 'styled-components/native';
 import { Dimensions, FlatList } from 'react-native';
 
-type ImageIndexProps = {
-  active: boolean;
-};
-
 export const Container = styled.View``;
 
 export const ImageIndexes = styled.View`
@@ -12,15 +8,6 @@ export const ImageIndexes = styled.View`
   justify-content: flex-end;
 
   padding-right: 24px;
-`;
-
-export const ImageIndex = styled.View<ImageIndexProps>`
-  width: 8px;
-  height: 8px;
-  border-radius: 3px;
-  margin-right: 8px;
-  background-color: ${({ theme, active }) =>
-    active ? theme.colors.title : theme.colors.shape};
 `;
 
 export const CarImageWrapper = styled.View`
