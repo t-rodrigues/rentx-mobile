@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import { StatusBar, useWindowDimensions } from 'react-native';
 
 import { useNavigation } from '@react-navigation/core';
@@ -9,13 +9,24 @@ import Logo from '@/assets/logo_background_gray.svg';
 import ConfirmButton from '@/components/ConfirmButton';
 
 import { Container, Content, Title, Message, Footer } from './styles';
+import { useRoute } from '@react-navigation/native';
 
-const SchedulingComplete = (): JSX.Element => {
+type ConfirmationParams = {
+  title: string;
+  message: string;
+  nextScreenRoute: string;
+};
+
+const Confirmation = (): ReactElement => {
   const navigation = useNavigation();
+  const route = useRoute();
   const { width } = useWindowDimensions();
 
+  const { title, message, nextScreenRoute } =
+    route.params as ConfirmationParams;
+
   const handleConfirm = () => {
-    navigation.navigate('Home');
+    navigation.navigate(nextScreenRoute);
   };
 
   return (
@@ -30,13 +41,9 @@ const SchedulingComplete = (): JSX.Element => {
 
       <Content>
         <Done width={80} height={80} />
-        <Title>Carro alugado!</Title>
+        <Title>{title}</Title>
 
-        <Message>
-          Agora você só precisa ir {'\n'}
-          até a concessionária da RENTX {'\n'}
-          pegar o seu automóvel.
-        </Message>
+        {message && <Message>{message}</Message>}
       </Content>
 
       <Footer>
@@ -46,4 +53,4 @@ const SchedulingComplete = (): JSX.Element => {
   );
 };
 
-export default SchedulingComplete;
+export default Confirmation;

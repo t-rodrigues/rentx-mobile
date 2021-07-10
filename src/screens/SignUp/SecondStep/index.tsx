@@ -37,9 +37,11 @@ const SecondStep = (): JSX.Element => {
 
   function handleRegister() {
     if (!!password && password === passwordConfirmation) {
-      return console.log({
-        ...user,
-        password,
+      console.log({ ...user, password });
+      return navigation.navigate('Confirmation', {
+        title: 'Conta criada!',
+        message: `Agora é só fazer login\ne aproveitar`,
+        nextScreenRoute: 'SignIn',
       });
     }
     console.log('error');
