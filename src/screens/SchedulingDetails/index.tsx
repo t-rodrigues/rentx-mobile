@@ -4,12 +4,11 @@ import { RFValue } from 'react-native-responsive-fontsize';
 import { format } from 'date-fns';
 
 import { useRoute, useNavigation } from '@react-navigation/native';
-import { useTheme } from 'styled-components';
 
+import { api } from '@/services/api';
 import { CarDto } from '@/services/fetchCars';
 import { getAccessoryIcon } from '@/utils/getAccessoryIcon';
 import { getPlatformDate } from '@/utils/getPlatformDate';
-import { api } from '@/services/api';
 
 import Accessory from '@/components/Accessory';
 import BackButton from '@/components/BackButton';
@@ -60,7 +59,6 @@ const SchedulingDetails = (): JSX.Element => {
 
   const navigation = useNavigation();
   const route = useRoute();
-  const theme = useTheme();
   const { car, dates } = route.params as Params;
 
   const rentalTotal = Number(car.rent.price) * dates.length;
@@ -91,7 +89,7 @@ const SchedulingDetails = (): JSX.Element => {
       })
       .catch(() => {
         setLoading(false);
-        Alert.alert('Error!', 'Não foi possível conclur sua solicitação');
+        Alert.alert('Error!', 'Não foi possível concluir sua solicitação');
       });
   };
 
@@ -175,7 +173,7 @@ const SchedulingDetails = (): JSX.Element => {
       <Footer>
         <Button
           title="Alugar agora"
-          color={theme.colors.success}
+          type="success"
           onPress={handleScheduleConfirm}
           enabled={!loading}
           loading={loading}
