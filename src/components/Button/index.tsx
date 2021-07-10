@@ -7,14 +7,14 @@ import { Container, Title } from './styles';
 
 interface Props extends RectButtonProps {
   title: string;
-  color?: string;
+  type?: 'main' | 'success' | 'light';
   loading?: boolean;
   light?: boolean;
 }
 
 const Button = ({
   title,
-  color,
+  type = 'main',
   onPress,
   enabled = true,
   loading = false,
@@ -23,7 +23,7 @@ const Button = ({
 }: Props): JSX.Element => {
   return (
     <Container
-      color={color}
+      type={type}
       onPress={onPress}
       enabled={enabled}
       style={{ opacity: !enabled || loading ? 0.5 : 1 }}
