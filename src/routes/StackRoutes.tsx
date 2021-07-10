@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import Home from '@/screens/Home';
@@ -10,10 +10,11 @@ import MyCars from '@/screens/MyCars';
 import SignIn from '@/screens/SignIn';
 import Splash from '@/screens/Splash';
 import FirstStep from '@/screens/SignUp/FirstStep';
+import SecondStep from '@/screens/SignUp/SecondStep';
 
 const { Navigator, Screen } = createStackNavigator();
 
-const StackRoutes = (): JSX.Element => {
+const StackRoutes = (): ReactElement => {
   return (
     <Navigator initialRouteName="SignIn" headerMode="none">
       <Screen
@@ -29,6 +30,7 @@ const StackRoutes = (): JSX.Element => {
       <Screen name="Splash" component={Splash} />
       <Screen name="SignIn" component={SignIn} />
       <Screen name="SignUpFirstStep" component={FirstStep} />
+      <Screen name="SignUpSecondStep" component={SecondStep} />
     </Navigator>
   );
 };

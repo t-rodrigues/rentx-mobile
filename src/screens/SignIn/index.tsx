@@ -8,7 +8,6 @@ import {
 } from 'react-native';
 import * as Yup from 'yup';
 
-import { useTheme } from 'styled-components';
 import { useNavigation } from '@react-navigation/native';
 
 import Button from '@/components/Button';
@@ -21,7 +20,6 @@ const SignIn = (): JSX.Element => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const theme = useTheme();
   const navigation = useNavigation();
 
   const handleSignUp = () => {
@@ -94,9 +92,8 @@ const SignIn = (): JSX.Element => {
             <Button
               title="Criar conta gratuita"
               onPress={handleSignUp}
-              color={theme.colors.backgroundSecondary}
+              type="light"
               light
-              enabled
             />
           </Footer>
         </Container>
