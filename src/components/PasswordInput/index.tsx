@@ -12,11 +12,15 @@ import {
 } from './styles';
 
 type Props = TextInputProps & {
-  iconName: React.ComponentProps<typeof Feather>['name'];
+  iconName?: React.ComponentProps<typeof Feather>['name'];
   value?: string;
 };
 
-const PasswordInput = ({ iconName, value, ...rest }: Props): JSX.Element => {
+const PasswordInput = ({
+  iconName = 'lock',
+  value,
+  ...rest
+}: Props): JSX.Element => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(true);
   const [isFocused, setIsFocused] = useState(false);
   const [isFilled, setIsFilled] = useState(false);
