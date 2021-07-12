@@ -3,6 +3,7 @@ import {
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
   StatusBar,
+  Alert,
 } from 'react-native';
 
 import { useNavigation, useRoute } from '@react-navigation/native';
@@ -11,6 +12,8 @@ import BackButton from '@/components/BackButton';
 import Bullet from '@/components/Bullet';
 import Button from '@/components/Button';
 import PasswordInput from '@/components/PasswordInput';
+
+import { api } from '@/services/api';
 
 import { Container, Header, Steps, Form, FormTitle } from './styles';
 
@@ -35,16 +38,30 @@ const SecondStep = (): JSX.Element => {
     navigation.goBack();
   }
 
-  function handleRegister() {
-    if (!!password && password === passwordConfirmation) {
-      console.log({ ...user, password });
-      return navigation.navigate('Confirmation', {
-        title: 'Conta criada!',
-        message: `Agora é só fazer login\ne aproveitar`,
-        nextScreenRoute: 'SignIn',
-      });
+  async function handleRegister() {
+    if (password !== passwordConfirmation) {
+      Alert.alert('Opa', 'As senhas não conferem');
     }
-    console.log('error');
+
+    if (!password) {
+      Alert.alert('Opa', 'Por favor, informe uma senha');
+    }
+
+    await api
+      .post('/users', {
+        name: user.name,
+        email: user.email,
+        driver_license: user.driverLicense,
+        password,
+      })
+      .then(() => {
+        return navigation.navigate('Confirmation', {
+          title: 'Conta criada!',
+          message: `Agora é só fazer login\ne aproveitar`,
+          nextScreenRoute: 'SignIn',
+        });
+      })
+      .catch(() => Alert.alert('Opa', 'Não foi possível cadastrar'));
   }
 
   return (
@@ -56,6 +73,7 @@ const SecondStep = (): JSX.Element => {
             translucent
             backgroundColor="transparent"
           />
+
           <Header>
             <BackButton onPress={handleGoBack} />
 
