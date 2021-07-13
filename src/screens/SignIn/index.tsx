@@ -15,12 +15,14 @@ import Input from '@/components/Input';
 import PasswordInput from '@/components/PasswordInput';
 
 import { Container, Header, Title, SubTitle, Form, Footer } from './styles';
+import { useAuth } from '@/hooks/auth';
 
 const SignIn = (): JSX.Element => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const navigation = useNavigation();
+  const { signIn } = useAuth();
 
   const handleSignUp = () => {
     navigation.navigate('SignUpFirstStep');
@@ -36,6 +38,7 @@ const SignIn = (): JSX.Element => {
       });
 
       await schema.validate({ email, password });
+      signIn({ email, password });
     } catch (error) {
       if (error instanceof Yup.ValidationError) {
         return Alert.alert('Opa', error.message);

@@ -15,6 +15,7 @@ import {
 import { ThemeProvider } from 'styled-components';
 
 import Loading from '@/components/Loading';
+import { AppProvider } from '@/hooks';
 import Routes from '@/routes';
 import { theme } from '@/styles/theme';
 
@@ -33,7 +34,9 @@ const App = (): JSX.Element => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Routes />
+      <AppProvider>
+        <Routes />
+      </AppProvider>
     </ThemeProvider>
   );
 };
