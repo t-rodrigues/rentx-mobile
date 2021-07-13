@@ -1,12 +1,16 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 
-import StackRoutes from './StackRoutes';
+import { useAuth } from '@/hooks/auth';
 
-const Routes = (): JSX.Element => {
+import AppTabRoutes from '@/routes/AppTabRoutes';
+import AuthRoutes from '@/routes/AuthRoutes';
+
+const Routes = (): ReactElement => {
+  const { user } = useAuth();
   return (
     <NavigationContainer>
-      <StackRoutes />
+      {user ? <AppTabRoutes /> : <AuthRoutes />}
     </NavigationContainer>
   );
 };

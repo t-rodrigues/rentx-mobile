@@ -4,7 +4,7 @@ import { StatusBar } from 'react-native';
 import { useTheme } from 'styled-components';
 import { useNavigation } from '@react-navigation/native';
 
-import { CarDto } from '@/services/fetchCars';
+import { CarDto } from '@/models/CarDto';
 import { api } from '@/services/api';
 
 import BackButton from '@/components/BackButton';
@@ -47,7 +47,7 @@ const MyCars = (): JSX.Element => {
 
   const loadData = async () => {
     try {
-      const response = await api.get(`/schedules_byuser?user_id=1`);
+      const response = await api.get(`/rentals`);
 
       setCars(response.data);
     } catch (error) {
