@@ -13,13 +13,13 @@ import Animated, {
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { useTheme } from 'styled-components';
 
+import { CarDto } from '@/models/CarDto';
+import { getAccessoryIcon } from '@/utils/getAccessoryIcon';
+
 import Accessory from '@/components/Accessory';
 import BackButton from '@/components/BackButton';
 import Button from '@/components/Button';
 import ImageSlider from '@/components/ImageSlider';
-
-import { CarDto } from '@/services/fetchCars';
-import { getAccessoryIcon } from '@/utils/getAccessoryIcon';
 
 import {
   Container,
@@ -115,15 +115,15 @@ const CarDetails = (): JSX.Element => {
             <Name>{car.name}</Name>
           </Description>
           <Rent>
-            <Period>{car.rent.period}</Period>
-            <Price>R$ {car.rent.price}</Price>
+            <Period>{car.period}</Period>
+            <Price>R$ {car.price}</Price>
           </Rent>
         </Details>
 
         <Accessories>
           {car.accessories.map(accessory => (
             <Accessory
-              key={accessory.type}
+              key={accessory.id}
               name={accessory.name}
               icon={getAccessoryIcon(accessory.type)}
             />

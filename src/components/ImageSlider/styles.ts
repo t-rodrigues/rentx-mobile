@@ -19,7 +19,9 @@ export const CarImageWrapper = styled.View`
   align-items: center;
 `;
 
-export const CarImageList = styled(FlatList as new () => FlatList<string>)``;
+export const CarImageList = styled(
+  FlatList as new () => FlatList<{ id: string; photo: string }>,
+)``;
 
 export const CarImage = styled.Image`
   width: 280px;

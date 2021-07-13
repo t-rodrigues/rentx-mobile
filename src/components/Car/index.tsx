@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import { RectButtonProps } from 'react-native-gesture-handler';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { useTheme } from 'styled-components';
 
-import { CarDto } from '@/services/fetchCars';
+import { CarDto } from '@/models/CarDto';
 import { getAccessoryIcon } from '@/utils/getAccessoryIcon';
 
 import {
@@ -23,7 +23,7 @@ interface Props extends RectButtonProps {
   data: CarDto;
 }
 
-const Car = ({ data, ...rest }: Props): JSX.Element => {
+const Car = ({ data, ...rest }: Props): ReactElement => {
   const theme = useTheme();
   const TypeIcon = getAccessoryIcon(data.fuel_type);
 
@@ -35,8 +35,8 @@ const Car = ({ data, ...rest }: Props): JSX.Element => {
 
         <About>
           <Rent>
-            <Period>{data.rent.period}</Period>
-            <Price>{`R$ ${data.rent.price}`}</Price>
+            <Period>{data.period}</Period>
+            <Price>{`R$ ${data.price}`}</Price>
           </Rent>
           <Type>
             <TypeIcon
