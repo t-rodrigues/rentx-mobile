@@ -59,7 +59,7 @@ const FirstStep = (): JSX.Element => {
 
       await schema.validate(data);
 
-      navigation.navigate('SignUpSecondStep', { user: data });
+      navigation.navigate('SecondStep', { user: data });
     } catch (error) {
       if (error instanceof Yup.ValidationError) {
         Alert.alert('Opa', error.message);

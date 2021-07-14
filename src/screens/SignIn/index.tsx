@@ -25,7 +25,7 @@ const SignIn = (): JSX.Element => {
   const { signIn } = useAuth();
 
   const handleSignUp = () => {
-    navigation.navigate('SignUpFirstStep');
+    navigation.navigate('FirstStep');
   };
 
   const handleSignIn = async () => {
